@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { showCart } from '../../redux/redux/action/showcart.action';
 import CustomButton from '../custom-button';
-
+import { cartitems } from '../../redux/redux/action/cartitems.action';
 
 const style = {
     position: 'relative',
@@ -29,8 +29,11 @@ const style = {
 export default function BasicModal() {
     const show= useSelector(state=> state.shop.showcart)
     const [count,setcount] = React.useState(0)
+    let total=0;
     console.log(show)
     const dispatch= useDispatch()
+    const cartitem= useSelector(state=>state.shop.cartitems);
+    console.log(cartitem)
   const [open, setOpen] = React.useState(show);
   
   const handleOpen = () => dispatch(showCart(true));
@@ -53,35 +56,33 @@ export default function BasicModal() {
        
          
           <Box sx={style}>
-            <div> <h1>cart</h1></div>
+           
            
          <div style={{height:"400px",width:"300px",display:"block",alignItems:"center", justifyContent:"center",flexDirection:"column",overflowY:"auto"}}>
-            <div style={{ width:"270px",height:"50px",backgroundColor:"white",margin:"5px",border:"2px solid black"}}>
-              <button onClick={()=>{setcount(count+1)}}>+</button>
-             [ {count} ]
+         {  cartitem.map((item)=>(
+          
+            <div style={{ display:"flex",width:"270px",height:"90px",backgroundColor:"white",margin:"3px",border:"2px solid black"}}>
+              <div ><img src={item.imageUrl} width="80px" height="100%" /></div>
+             <div style={{margin:"10px"}}>
+            <p style={{margin:"0",padding:"0"}}>{item.name}</p>
+            <p style={{margin:"0",padding:"0"}}>{item.quantity} x ${item.price}</p>
+            <p style={{margin:"0",padding:"0"}}>
+            <button onClick={()=>{
+              
+              setcount(count+1)
+             
+              }}>+</button>
+            {"  "}
               <button onClick={()=>{setcount(count-1)}}>-</button>
+              {"  "}
+              <button onClick={()=>{setcount(0)}}>X</button>
+              </p>
+              </div>
+             
             </div>
-            <div style={{ width:"270px",height:"50px",backgroundColor:"white",margin:"5px",border:"2px solid black"}}>
-              <button onClick={()=>{setcount(count+1)}}>+</button>
-             [ {count} ]
-              <button onClick={()=>{setcount(count-1)}}>-</button>
-            </div>
-            <div style={{ width:"270px",height:"50px",backgroundColor:"white",margin:"5px",border:"2px solid black"}}>
-              <button onClick={()=>{setcount(count+1)}}>+</button>
-             [ {count} ]
-              <button onClick={()=>{setcount(count-1)}}>-</button>
-            </div>
-            <div style={{ width:"270px",height:"50px",backgroundColor:"white",margin:"5px",border:"2px solid black"}}>
-              <button onClick={()=>{setcount(count+1)}}>+</button>
-             [ {count} ]
-              <button onClick={()=>{setcount(count-1)}}>-</button>
-            </div>
-            <div style={{ width:"270px",height:"50px",backgroundColor:"white",margin:"5px",border:"2px solid black"}}>
-              <button onClick={()=>{setcount(count+1)}}>+</button>
-             [ {count} ]
-              <button onClick={()=>{setcount(count-1)}}>-</button>
-            </div>
-            
+         )
+           )
+         }
             
            
             </div>
@@ -89,9 +90,12 @@ export default function BasicModal() {
 
             
 
-           
-
-         
+          { cartitem.map((item)=>{
+             total=total+(item.quantity*item.price)
+           })
+          }
+          
+         <p>{total}</p>
 
          <div><CustomButton style={{width:"100px",height:"50px" , color:"white", backgroundColor:"black",margin:"10px"} }> CHECK OUT</CustomButton></div>
          </Box>

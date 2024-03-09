@@ -178,8 +178,7 @@ const stylenav = {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 
-             <p style={{color:"white", border:"2px solid white"}}>
-              welcome{localStorage.getItem("username")!=undefined?localStorage.getItem("username"):" Guest"}</p>
+            
               </IconButton>
             </Tooltip>
             <Menu

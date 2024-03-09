@@ -3,10 +3,14 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { SHOP_DATA } from "./utils/jsondata";
 import Error from "./Error";
+import { useDispatch } from "react-redux";
+import { cartitems } from "../redux/redux/action/cartitems.action";
 
   
 
 const Product = ()=>{
+   const dispatch= useDispatch();
+
  const prod =  useParams();
 
  const notify = () => {
@@ -39,18 +43,24 @@ const itemarray= SHOP_DATA;
 
 console.log(getidx())
     return getidx()==-1? <Error/>:(
-        <div>
+        <div >
              {notify()}
         <ToastContainer />
              product page of {prod.title} 
             
              {itemarray[getidx()].items.map((item)=>(
-               <ul>
+              <>
+               <ul key={item.id}>
               <li>{item.id}</li>
               <li><img src={item.imageUrl}/></li>
               <li>{item.name}</li>
               <li>Rs.{item.price}</li>
               </ul>
+              <button onClick={()=>{
+              
+                dispatch(cartitems(item))
+              }}> Add to cart </button>
+              </>
              ))}
             
              </div>

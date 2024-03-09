@@ -48,7 +48,7 @@ function Media(props) {
           //     "Why First Minister of Scotland Nicola Sturgeon thinks GDP is the wrong measure of a country's success:"
           //   }
           // </Typography>
-          <Button variant="contained"   style={{color:"black", background:"#D0D0D0",opacity:"0.8",width:'170px', height:"90px",display:"flex",flexWrap:"wrap"}}>
+          <Button variant="contained"   style={{fontWeight:"bold",fontFamily:"initial",color:"black", background:"#D0D0D0",opacity:"0.8",width:'170px', height:"90px",display:"flex",flexWrap:"wrap"}}>
             
          <div style={{fontSize:"25px"}}>{title.toUpperCase()}</div> 
         <Link to ={"/shop/"+title} style={{textDecoration:"none", color:"black"}}> <div>SHOP NOW <LocalMallIcon/></div> </Link>
