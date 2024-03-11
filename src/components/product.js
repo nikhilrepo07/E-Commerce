@@ -4,7 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { SHOP_DATA } from "./utils/jsondata";
 import Error from "./Error";
 import { useDispatch } from "react-redux";
-import { cartitems } from "../redux/redux/action/cartitems.action";
+
+import { addCartItems } from "../redux/redux/action/addcartitems.action";
 
   
 
@@ -58,7 +59,7 @@ console.log(getidx())
               </ul>
               <button onClick={()=>{
               
-                dispatch(cartitems(item))
+                dispatch(addCartItems(item))
               }}> Add to cart </button>
               </>
              ))}

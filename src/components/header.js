@@ -30,7 +30,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const dispath = useDispatch();
   const togg= useSelector(state=>state.shop.showcart)
-  const itemslength=useSelector(state=>state.shop.cartitems).length
+  const itemslength=useSelector(state=>state.shop.cartitems)
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -168,7 +168,7 @@ const stylenav = {
           <IconButton aria-label="cart" sx={{color:'inherit'}} onClick={()=>
              dispath(showCart(true))
           }>
-      <StyledBadge badgeContent={itemslength} color="secondary">
+      <StyledBadge badgeContent={0} color="secondary">
         <ShoppingCartIcon />
         
       </StyledBadge>

@@ -6,7 +6,10 @@ import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { showCart } from '../../redux/redux/action/showcart.action';
 import CustomButton from '../custom-button';
-import { cartitems } from '../../redux/redux/action/cartitems.action';
+import { addCartItems } from '../../redux/redux/action/addcartitems.action';
+import { removeCartItems } from '../../redux/redux/action/removecartitem.action';
+import { clearCartItems } from '../../redux/redux/action/clearitem.action';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const style = {
     position: 'relative',
@@ -61,21 +64,26 @@ export default function BasicModal() {
          <div style={{height:"400px",width:"300px",display:"block",alignItems:"center", justifyContent:"center",flexDirection:"column",overflowY:"auto"}}>
          {  cartitem.map((item)=>(
           
-            <div style={{ display:"flex",width:"270px",height:"90px",backgroundColor:"white",margin:"3px",border:"2px solid black"}}>
+            <div key={item.id} style={{ display:"flex",width:"270px",height:"90px",backgroundColor:"white",margin:"3px",border:"2px solid black"}}>
               <div ><img src={item.imageUrl} width="80px" height="100%" /></div>
              <div style={{margin:"10px"}}>
             <p style={{margin:"0",padding:"0"}}>{item.name}</p>
             <p style={{margin:"0",padding:"0"}}>{item.quantity} x ${item.price}</p>
             <p style={{margin:"0",padding:"0"}}>
-            <button onClick={()=>{
-              
+            <button key={item.id} onClick={()=>{
+              dispatch(addCartItems(item))
               setcount(count+1)
              
               }}>+</button>
             {"  "}
-              <button onClick={()=>{setcount(count-1)}}>-</button>
+              <button onClick={()=>{
+                dispatch(removeCartItems(item))
+                setcount(count-1)}}>-</button>
               {"  "}
-              <button onClick={()=>{setcount(0)}}>X</button>
+
+              <button onClick={()=>{
+                dispatch(clearCartItems(item))
+                setcount(count-1)}}><DeleteForeverIcon/></button>
               </p>
               </div>
              
@@ -95,7 +103,7 @@ export default function BasicModal() {
            })
           }
           
-         <p>{total}</p>
+         <p>Total: {total}$</p>
 
          <div><CustomButton style={{width:"100px",height:"50px" , color:"white", backgroundColor:"black",margin:"10px"} }> CHECK OUT</CustomButton></div>
          </Box>

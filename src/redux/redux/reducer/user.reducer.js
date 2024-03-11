@@ -1,4 +1,6 @@
-import { CART_ITEMS, cartitems } from "../action/cartitems.action"
+import { ADD_CART_ITEMS, cartitems } from "../action/addcartitems.action"
+import { CLEAR_CART_ITEM } from "../action/clearitem.action"
+import { REMOVE_CART_ITEM } from "../action/removecartitem.action"
 import { SEARCH_PRODUCT } from "../action/search.action"
 import { SHOW_CART } from "../action/showcart.action"
 import { USER_DETAIL } from "../action/user.action"
@@ -13,6 +15,7 @@ const initialUserState={
     showcart:false,
     user:null
 }
+
 const addItems= (state,item) =>{
     let idx=state.cartitems.find(ele=>ele.id===item.id)
     console.log(idx)
@@ -23,11 +26,12 @@ const addItems= (state,item) =>{
     else{
     //     console.log(state.cartitems)
         
-       state.cartitems.map((i,ix)=>{
-        idx=ix
-        if(i.id===item.id)
-      
-    return idx
+     const idd=  state.cartitems.map((i,ix)=>{
+       
+        if(i.id===item.id){
+            idx=ix
+    return ix
+        }
        })
     //     console.log("fas gaya",idx)
 
@@ -37,14 +41,66 @@ const addItems= (state,item) =>{
     }
     return state.cartitems;
 }
+
+const removeItem= (state,item) =>{
+    let idx;
+    state.cartitems.map((i,ix)=>{
+       
+        if(i.id===item.id){
+            idx=ix
+    return ix
+        }
+       })
+
+    if(state.cartitems[idx].quantity===1){
+        state.cartitems.splice(idx,1);
+    }
+    else{
+        state.cartitems[idx].quantity--;
+    }
+    return state.cartitems
+
+}
+
+const clearItem = (state,item) =>{
+    let idx;
+    state.cartitems.map((i,ix)=>{
+       
+        if(i.id===item.id){
+            idx=ix
+    return ix
+        }
+       })
+    state.cartitems.splice(idx,1)
+
+    return state.cartitems
+}
+
+
+
+
 export const shopReducer=(state=initialUserState,action)=>{
       switch(action.type){
-        case CART_ITEMS:
+        case ADD_CART_ITEMS:
            // {state.cartitems.push(action.payload)}
             return{
                 
                 ...state,
                 cartitems:addItems(state,action.payload)  //Updating State
+            }
+       
+            case REMOVE_CART_ITEM:
+
+            return{
+                ...state,
+                cartitems:removeItem(state,action.payload)
+            }
+            
+        
+         case CLEAR_CART_ITEM:
+            return{
+                ...state,
+                cartitems:clearItem(state,action.payload)
             }
 
             case SEARCH_PRODUCT:
