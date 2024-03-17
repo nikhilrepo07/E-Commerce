@@ -71,7 +71,7 @@ function ResponsiveAppBar() {
     <>
       {togg && <BasicModal />}
 
-      <AppBar position="static" sx={{background:"linear-gradient(45deg,#C33764  ,#1D2671)",}}>
+      <AppBar position="static" sx={{background:"linear-gradient(114.2deg, rgb(121, 19, 243) 22.6%, rgb(25, 180, 239) 67.7%)",}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

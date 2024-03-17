@@ -7,18 +7,21 @@ import Body from './components/Body/Body';
 import Payment from './components/payment';
 import Product from './components/Product/product';
 import Signup from './components/signup/signup';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import {  useSelector } from 'react-redux';
+
 import { Shop } from './components/Shop';
+import CheckOut from './components/Checkout';
+
 
 
 
 
 
 const App = () =>{
+  const logged = useSelector(state=> state.user.user)
   return (
     <>
-    <Provider store={store}>
+   
    <BrowserRouter>
     <ResponsiveAppBar/>
     <Routes>
@@ -27,10 +30,12 @@ const App = () =>{
        <Route path="/contact" element={<Contact/>}/>
        <Route path="/shop" element={<Shop/>}/>
        <Route path="/payment" element={<Payment/>}/>
+       <Route path="/checkout" element={(logged===null)?<Signup/>:<CheckOut/>}/>
+       
        <Route path="/shop/:title" element={<Product/>}/>
     </Routes>
     </BrowserRouter>
-    </Provider>
+   
     </>
   )
 }

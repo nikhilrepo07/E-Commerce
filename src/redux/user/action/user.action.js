@@ -1,6 +1,6 @@
 export const USER_DETAIL="USER_DETAIL"
 
-export const userdetail=(user)=>(
+export const setUser=(user)=>(
     {
         type:USER_DETAIL,  //Mandatory
         payload:user //Optional

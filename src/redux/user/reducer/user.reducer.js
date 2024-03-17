@@ -9,7 +9,7 @@ const initialUserState={
 
 
 
-export const shopReducer=(state=initialUserState,action)=>{
+export const userReducer=(state=initialUserState,action)=>{
       switch(action.type){
        
                     case USER_DETAIL:

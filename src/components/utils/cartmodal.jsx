@@ -129,7 +129,9 @@ export default function BasicModal() {
               backgroundColor: "black",
               margin: "5px",
             }}
-            onClick={()=> navigate("/payment")}
+            onClick={()=> {
+              dispatch(showCart(false))
+              navigate("/checkout")}}
           >
             CHECK OUT
           </CustomButton>

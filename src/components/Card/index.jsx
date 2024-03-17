@@ -34,7 +34,7 @@ const dispatch=useDispatch();
               alt={item.name}
             />
             <div className="textblock" >
-              <CustomButton style={{height:"50px",width:"100%",opacity:"0.7",fontSize:"15px",fontWeight:"50px"}} onClick={handleClick} >ADD TO CART</CustomButton>
+              <CustomButton style={{height:"50px",width:"100%",opacity:"0.7",fontSize:"15px",fontWeight:"50px",cursor: "pointer"}} onClick={handleClick} >ADD TO CART</CustomButton>
             </div>
           </div>
           <CardContent>

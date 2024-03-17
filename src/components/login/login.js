@@ -4,11 +4,15 @@ import CustomButton from "../custom-button";
 import CustomTextfield from "../custom-textfield";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/user/action/user.action";
 
 const Login = () => {
   const [refresh, setrefresh] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const param= useLocation()
   const [UserData, setUserData] = useState({
     email: "",
     password: "",
@@ -31,12 +35,20 @@ const Login = () => {
       );
       console.log(response);
       console.log(response.data.username);
-
+      if(response.data.logged){
       localStorage.setItem("username", JSON.stringify(response.data.username));
       localStorage.setItem("token", JSON.stringify(response.data.token));
+      dispatch(setUser(response.data))
       alert("Login successful");
-      setrefresh(!refresh);
+      console.log(param.pathname)
+    //  if(param.pathname==="/Signup")
       navigate("/");
+      
+      setrefresh(!refresh);
+      }  
+      else{
+        alert("wrong credentials")
+      }
     } catch (error) {
       console.log(error);
       alert("Login failed");
@@ -77,6 +89,7 @@ const Login = () => {
               height: "50px",
               color: "white",
               backgroundColor: "#3CB043",
+              cursor: "pointer"
             }}
             onClick={handleSubmit}
           >

@@ -33,6 +33,7 @@ const CheckoutForm = () => {
     const res = await fetch('/create-intent', {
       method: 'POST',
     });
+    console.log(res)
 
     const {client_secret: clientSecret} = await res.json();
 
@@ -44,7 +45,7 @@ const CheckoutForm = () => {
         return_url: 'https://example.com/order/123/complete',
       },
     });
-
+console.log(error)
     if (error) {
       // This point will only be reached if there is an immediate error when
       // confirming the payment. Show error to your customer (for example, payment
@@ -54,6 +55,7 @@ const CheckoutForm = () => {
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
+      alert("payment successfull")
     }
   };
 
@@ -69,23 +71,26 @@ const CheckoutForm = () => {
   );
 };
 
-const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+const stripePromise = loadStripe('pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3');
 
 const options = {
-  mode: 'payment',
-  amount: 100,
-  currency: 'usd',
+  mode:'payment',
+  amount: 500,
+  currency: 'gbp',
+  payment_method: 'pm_card_visa',
   // Fully customizable with appearance API.
   appearance: {
     /*...*/
     theme: 'flat'
   },
+
+  
 };
 
 const Payment = () => (
   <Elements stripe={stripePromise} options={options} style={{display:"flex",flexDirection:"column"}}>
     <CheckoutForm />
-  </Elements>
+  </Elements >
 );
 
 export default Payment;

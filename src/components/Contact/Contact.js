@@ -26,7 +26,7 @@ const Contact= ()=>{
     <CustomTextfield id="message" label="Message"  variant="outlined" />
     </Item>
     <Item>
-    <CustomButton style={{width:"100px",height:"50px" , color:"white", backgroundColor:"blue"}}>Send</CustomButton> 
+    <CustomButton style={{width:"100px",height:"50px" , color:"white", backgroundColor:"blue",cursor: "pointer"}}>Send</CustomButton> 
    </Item>
    </Grid>
   </Box>

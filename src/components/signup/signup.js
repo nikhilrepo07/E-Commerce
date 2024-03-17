@@ -6,6 +6,9 @@ import CustomButton from "../custom-button";
 import CustomTextfield from "../custom-textfield";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/user/action/user.action";
+import { useLocation } from "react-router-dom";
 const Signup = () => {
   const [refresh, setrefresh] = useState(false);
 
@@ -14,7 +17,10 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  
+  const dispatch= useDispatch()
   console.log(UserData);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevState) => ({
@@ -46,6 +52,7 @@ const Signup = () => {
         onClick={() => {
           localStorage.clear("username");
           localStorage.clear("token");
+          dispatch(setUser(null))
           setrefresh(!refresh);
         }}
       >
@@ -112,6 +119,7 @@ const Signup = () => {
                 height: "50px",
                 color: "white",
                 backgroundColor: "red",
+                cursor: "pointer"
               }}
               type="submit"
               onClick={handleSubmit}
