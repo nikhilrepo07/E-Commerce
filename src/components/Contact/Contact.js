@@ -1,10 +1,8 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { Item } from './utils/item';
-import CustomTextfield from './custom-textfield';
-import CustomButton from './custom-button';
+import { Item } from '../utils/item';
+import CustomTextfield from '../custom-textfield';
+import CustomButton from '../custom-button';
 
 const Contact= ()=>{
     return (

@@ -1,10 +1,11 @@
-import * as React from 'react';
+import  React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import CategoryCard from '../MaterialComponents/skeleton';
-import { CATEGORY } from './utils/jsondata';
+import CategoryCard from '../../MaterialComponents/skeleton';
+import { CATEGORY } from '../utils/jsondata';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategoryData } from '../../redux/category/action/action';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -17,8 +18,18 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
+
 const itemlist= CATEGORY;
 export default function Body() {
+const dispatch = useDispatch()
+const category = useSelector(state=> state.category.data)
+console.log(category)
+
+  useEffect(()=>{
+   dispatch(fetchCategoryData())    
+  },[dispatch])
+ 
   return (
     <>
     
@@ -28,22 +39,11 @@ export default function Body() {
     alignItems="center"
     minHeight="100vh"
     flexWrap="wrap"
+   
   >
      
-      {itemlist.sections.map((item)=> <CategoryCard key={item.id} category={item}/>)}
-         
-       
-          {/* <Facebook/>
-        
-          <Facebook/>
-       
-          <Facebook/>
-       
-         <Facebook/> */}
-       
-         
-         
-      
+      {category?.map((item)=> <CategoryCard key={item.id} category={item}/>)}
+           
      </Box>
      </>
   );

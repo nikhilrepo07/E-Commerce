@@ -1,58 +1,39 @@
 
-import { Outlet, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route,  Routes } from 'react-router-dom';
 import './App.css';
-import ResponsiveAppBar from './components/header';
-import Contact from './components/Contact';
-import Body from './components/Body';
-import Shop from './components/Shop';
-import Error from './components/Error';
-import Product from './components/product';
-import Signup from './components/signup';
+import ResponsiveAppBar from './header/header';
+import Contact from './components/Contact/Contact';
+import Body from './components/Body/Body';
+import Payment from './components/payment';
+import Product from './components/Product/product';
+import Signup from './components/signup/signup';
 import { Provider } from 'react-redux';
-import store from './redux/redux';
+import store from './redux/store';
+import { Shop } from './components/Shop';
 
-const Component = ()=>(
-   <Provider store={store}>
-  <div>
-   
+
+
+
+
+const App = () =>{
+  return (
+    <>
+    <Provider store={store}>
+   <BrowserRouter>
     <ResponsiveAppBar/>
-    <Outlet/>
-  
-  </div>
-  </Provider>
-)
+    <Routes>
+       <Route path="/" element={<Body/>}/>
+       <Route path="/signin" element={<Signup/>}/>
+       <Route path="/contact" element={<Contact/>}/>
+       <Route path="/shop" element={<Shop/>}/>
+       <Route path="/payment" element={<Payment/>}/>
+       <Route path="/shop/:title" element={<Product/>}/>
+    </Routes>
+    </BrowserRouter>
+    </Provider>
+    </>
+  )
+}
 
-const appRoutes = createBrowserRouter([
-  {
-       path:"/",
-       element: <Component/>,
-       children:[
-        {
-         path:"/",
-         element:<Body/>
-        },
-        {
-          path:"/Contact",
-          element:<Contact/>
-         },
-         {
-          path:"/Shop",
-          element:<Shop/>
-         },
-         {
-         path:"/signin",
-         element:<Signup/>
-         },
 
-         {
-          path:"/shop/:title",
-          element:<Product/>
-         },
-        
-
-       ],
-       errorElement: <Error/>
-},
-])
-
-export default appRoutes;
+export default App;
