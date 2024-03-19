@@ -81,7 +81,7 @@ export default function CheckOut() {
                 }}>
                     +
                     </CustomButton>
-                 <Typography>
+                 <Typography sx={{position:"relative",top:"12px"}}>
                    {item.quantity}
                  </Typography>
                  <CustomButton style={{backgroundColor:"red",color:"white",margin:"10px",height:"30px",width:"50px",cursor: "pointer"}}
@@ -108,11 +108,11 @@ export default function CheckOut() {
 
     <h2 style={{display:"flex",flexDirection:"column",alignItems:"center",cursor: "pointer"}}>
         {cartitem.map((item) => {
-          total = total + item.quantity * item.price;
-        })}
+          total = total + item.quantity * item.price
+})}
 
-        <p>Total: {total}$</p>
-        <CustomButton style={{width:"auto", height:"30px", backgroundColor:"orange",cursor: "pointer",cursor: "pointer"}} onClick={()=>
+        <p >Total: {total}$</p>
+        <CustomButton style={{width:"auto", height:"30px", backgroundColor:"orange",cursor: "pointer"}} onClick={()=>
         navigate("/payment")
         }> Pay Now</CustomButton>
     </h2>

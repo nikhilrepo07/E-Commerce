@@ -34,7 +34,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8085/user/registration",
+        "http://localhost:8000/user/registration",
         UserData
       );
       console.log(response);

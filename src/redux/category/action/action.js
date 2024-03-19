@@ -25,7 +25,8 @@ export const fetchCategoryData = () => {
   return async (dispatch) => {
     dispatch(fetchCategoryRequest());
     try {
-      const response = await axios.get('http://localhost:8000/category/findall');
+      const response = await axios.get('http://localhost:8085/category/findall');
+      console.log(response)
       dispatch(fetchCategorySuccess(response.data));
     } catch (error) {
       dispatch(fetchCategoryFailure(error));
