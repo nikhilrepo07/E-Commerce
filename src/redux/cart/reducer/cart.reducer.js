@@ -67,7 +67,7 @@ const clearItem = (state,item) =>{
     return ix
         }
        })
-    state.cartitems.splice(idx,1)
+   state.cartitems.splice(idx,1)
 
     return state.cartitems
 }

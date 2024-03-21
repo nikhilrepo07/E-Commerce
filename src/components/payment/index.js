@@ -7,6 +7,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { Modal } from '@mui/material';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -88,9 +89,11 @@ const options = {
 };
 
 const Payment = () => (
-  <Elements stripe={stripePromise} options={options} style={{display:"flex",flexDirection:"column"}}>
-    <CheckoutForm />
+ 
+  <Elements stripe={stripePromise} options={options} >
+    <CheckoutForm style={{display:"flex",flexDirection:"row",width:"50%"}}/>
   </Elements >
+ 
 );
 
 export default Payment;

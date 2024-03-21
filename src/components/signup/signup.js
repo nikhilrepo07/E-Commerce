@@ -4,14 +4,14 @@ import { Item } from "../utils/item";
 import Login from "../login/login";
 import CustomButton from "../custom-button";
 import CustomTextfield from "../custom-textfield";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/user/action/user.action";
-import { useLocation } from "react-router-dom";
+
 const Signup = () => {
   const [refresh, setrefresh] = useState(false);
-
+  const logged =useSelector(state=>state.user.user)
   const [UserData, setUserData] = useState({
     username: "",
     email: "",
@@ -34,7 +34,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/user/registration",
+        "http://localhost:8085/user/registration",
         UserData
       );
       console.log(response);
@@ -45,13 +45,12 @@ const Signup = () => {
     }
   };
 
-  return localStorage.getItem("username") ? (
+  return logged!==null ? (
     <div>
       please signout
       <button
         onClick={() => {
-          localStorage.clear("username");
-          localStorage.clear("token");
+         
           dispatch(setUser(null))
           setrefresh(!refresh);
         }}

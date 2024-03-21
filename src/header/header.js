@@ -19,6 +19,7 @@ import { styled } from "@mui/material/styles";
 import BasicModal from "../components/utils/cartmodal";
 import { useDispatch, useSelector } from "react-redux";
 import { showCart } from "../redux/cart/action/showcart.action";
+import { setUser } from "../redux/user/action/user.action";
 
 const pages = ["Shop", "Contact", "Signin"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -67,6 +68,7 @@ function ResponsiveAppBar() {
     textDecoration: "none",
   };
   const cartitem = useSelector((state) => state.cart.cartitems);
+  const logged = useSelector(state=> state.user.user);
   return (
     <>
       {togg && <BasicModal />}
@@ -126,10 +128,16 @@ function ResponsiveAppBar() {
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography
                       textAlign="center"
-                      onClick={() => navigate("/" + page)}
+                      onClick={() =>{ 
+                       
+                        navigate("/"+page)
+                    
+                    }}
                     >
+                    
+
                       {" "}
-                      {page}{" "}
+                      {page.includes("SIGN")?logged===null? "SIGNIN":"SIGNOUT":page}{" "}
                     </Typography>
                   </MenuItem>
                 ))}
